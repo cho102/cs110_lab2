@@ -2,11 +2,12 @@
 /* Winning values: 123,456, 789, 147, 258, 369, 159, 357 */
 var boardValues = ['-','-','-','-','-','-','-','-','-'];
 var winningValues = [123,456, 789, 147, 258, 369, 159, 357];
-var currUser = PLAYER2;
-PLAYER1 = 0;
-PLAYER2 = 1;
+var currUser = 'x';
+PLAYER1 = 'x';
+PLAYER2 = 'o';
 
 function mainGameplay(){
+
 
 }
 
@@ -26,12 +27,13 @@ function reset(){ //initialize board
 function checkBoard(){//if board is full
     var counter=0;
     for (var i=0;i<9;++i){
-        if(boardValues[i] != 0){
+        if(boardValues[i] != '-'){
             ++counter;
         }
     }
     if (counter == 9){
         //game is a draw
+        //display draw message
     }
     else {
         checkWin();
@@ -45,6 +47,7 @@ function switchTurns(){
     else {
         currUser = PLAYER2;
     }
+    //display whose turn it is
 }
 
 function checkWin(){//check for winning values
@@ -66,6 +69,13 @@ function checkWin(){//check for winning values
 } 
 
 function validPlay(); //check if position has been filled or not
-function playerWon(val){ //update score of player won
- //check
+function playerWon(temp){ //update score of player won
+ //check 
+    if (temp == 'x'){
+        //update score x
+    }
+    else {
+        //update score o
+    }
+    //display currUser won message
 }
