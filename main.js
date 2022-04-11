@@ -2,16 +2,25 @@
 /* Winning values: 123,456, 789, 147, 258, 369, 159, 357 */
 var boardValues = ['-','-','-','-','-','-','-','-','-'];
 var winningValues = [123,456, 789, 147, 258, 369, 159, 357];
-var currUser;
+var currUser = PLAYER2;
 PLAYER1 = 0;
 PLAYER2 = 1;
 
-function newGame(){ //newGame button pressed
+function mainGameplay(){
 
 }
 
-function reset(){ //initialize board
+function newGame(){ //newGame button pressed
+    for (var i=0; i < 9; ++i){
+        boardValues[i] = "-";
+    }
+}
 
+function reset(){ //initialize board
+    for (var i=0; i < 9; ++i){
+        boardValues[i] = "-";
+    }
+    //set player 1 and player 2 score to 0.
 } 
 
 function checkBoard(){//if board is full
