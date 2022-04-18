@@ -7,6 +7,8 @@ var currUser = 'X';
 const PLAYER1 = 'X';
 const PLAYER2 = 'O';
 
+
+var endGame = false;
 const newGame_btn = document.getElementById('new_game')
 const reset_btn = document.getElementById('reset')
 
@@ -14,7 +16,7 @@ const reset_btn = document.getElementById('reset')
     var position1 = document.getElementsByClassName("one")[0];
     position1.addEventListener("click", function(){
         var span = this.getElementsByClassName("xo")[0];
-        if (span.innerText == ""){
+        if (span.innerText == "" && !endGame){
             span.innerHTML = currUser;
             updateBoard(0);
             gamePlay();
@@ -36,7 +38,7 @@ const reset_btn = document.getElementById('reset')
     var position2 = document.getElementsByClassName("two")[0];
     position2.addEventListener("click", function(){
         var span = this.getElementsByClassName("xo")[0];
-        if (span.innerText == ""){
+        if (span.innerText == "" && !endGame){
             span.innerHTML = currUser;
             updateBoard(1);
             gamePlay();
@@ -58,7 +60,7 @@ const reset_btn = document.getElementById('reset')
     var position3 = document.getElementsByClassName("three")[0];
     position3.addEventListener("click", function(){
         var span = this.getElementsByClassName("xo")[0];
-        if (span.innerText == ""){
+        if (span.innerText == "" && !endGame){
             span.innerHTML = currUser;
             updateBoard(2);
             gamePlay();
@@ -80,7 +82,7 @@ const reset_btn = document.getElementById('reset')
     var position4 = document.getElementsByClassName("four")[0];
     position4.addEventListener("click", function(){
         var span = this.getElementsByClassName("xo")[0];
-        if (span.innerText == ""){
+        if (span.innerText == "" && !endGame){
             span.innerHTML = currUser;
             updateBoard(3);
             gamePlay();
@@ -102,7 +104,7 @@ const reset_btn = document.getElementById('reset')
     var position5 = document.getElementsByClassName("five")[0];
     position5.addEventListener("click", function(){
         var span = this.getElementsByClassName("xo")[0];
-        if (span.innerText == ""){
+        if (span.innerText == "" && !endGame){
             span.innerHTML = currUser;
             updateBoard(4);
             gamePlay();
@@ -124,7 +126,7 @@ const reset_btn = document.getElementById('reset')
     var position6 = document.getElementsByClassName("six")[0];
     position6.addEventListener("click", function(){
         var span = this.getElementsByClassName("xo")[0];
-        if (span.innerText == ""){
+        if (span.innerText == "" && !endGame){
             span.innerHTML = currUser;
             updateBoard(5);
             gamePlay();
@@ -146,7 +148,7 @@ const reset_btn = document.getElementById('reset')
     var position7 = document.getElementsByClassName("seven")[0];
     position7.addEventListener("click", function(){
         var span = this.getElementsByClassName("xo")[0];
-        if (span.innerText == ""){
+        if (span.innerText == "" && !endGame){
             span.innerHTML = currUser;
             updateBoard(6);
             gamePlay();
@@ -168,7 +170,7 @@ const reset_btn = document.getElementById('reset')
     var position8 = document.getElementsByClassName("eight")[0];
     position8.addEventListener("click", function(){
         var span = this.getElementsByClassName("xo")[0];
-        if (span.innerText == ""){
+        if (span.innerText == "" && !endGame){
             span.innerHTML = currUser;
             updateBoard(7);
             gamePlay();
@@ -190,7 +192,7 @@ const reset_btn = document.getElementById('reset')
     var position9 = document.getElementsByClassName("nine")[0];
     position9.addEventListener("click", function(){
         var span = this.getElementsByClassName("xo")[0];
-        if (span.innerText == ""){
+        if (span.innerText == "" && !endGame){
             span.innerHTML = currUser;
             updateBoard(8);
             gamePlay();
@@ -224,28 +226,34 @@ function gamePlay(){//main Game Play
 
 function updateBoard(location){
     boardValues[location] = currUser;
-    console.log(boardValues)
+   // console.log(boardValues)
 
 }
 
+const playerVal_temp = document.getElementsByClassName("display_player");
+console.log(playerVal_temp);
+
 const playerVal = document.getElementsByClassName("display_player")[0];
-function displayPlayer() { playerVal.innerText = currUser;
+function displayPlayer() {
     playerVal.innerText = currUser;
+  //  console.log(playerVal);
 }
 
 function checkBoard(){//if board is full
     //console.log("entered check board")
     checkWin();
     var counter=0;
-    for (var i=0;i<9;++i){
-        if(boardValues[i] != '-'){
-            ++counter;
+    if (!endGame){
+        for (var i=0;i<9;++i){
+            if(boardValues[i] != '-'){
+                ++counter;
+            }
         }
-    }
-    if (counter == 9){
-        console.log("game is tie")
-        //game is a draw
-        //display draw message
+        if (counter == 9){
+            console.log("game is tie")
+            message.innerText = "IT IS A TIE!"
+            endGame = true;
+        }
     }
 } 
 
@@ -294,6 +302,7 @@ function playerWon(temp){ //update score of player won
         ++oCount;
         oScore.innerText = oCount;
     }
+    endGame = true;
 }
 
 newGame_btn.addEventListener('click', function(){ //newGame button pressed
@@ -304,9 +313,11 @@ newGame_btn.addEventListener('click', function(){ //newGame button pressed
     for (var i = 0; i < span.length; ++i){
         span[i].innerText = "";
     }
+    endGame = false;
     currUser = 'X';
-    message.innerHTML = 'It\'s your turn, <span class="display_player">x</span>.';
+    //message.style.display = block;
     console.log('new game clicked')
+    message.innerHTML = "It\'s your turn, <span class=\"display_player\">X</span>.";
 });
 
 reset_btn.addEventListener('click', function(){ //initialize board
@@ -317,8 +328,10 @@ reset_btn.addEventListener('click', function(){ //initialize board
     for (var i = 0; i < span.length; ++i){
         span[i].innerText = "";
     }
+    endGame = false;
     xScore.innerText = 0;
     oScore.innerText = 0;
     currUser = 'X'
-    message.innerHTML = 'It\'s your turn, <span class="display_player">x</span>.';
+    message.innerHTML = "It\'s your turn, <span class=\"display_player\">X</span>.";
+    
 } );
