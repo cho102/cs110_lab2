@@ -242,14 +242,27 @@ const message = document.getElementsByTagName('h2')[1];
 const xWON = document.getElementsByTagName('h2')[2];
 const oWON = document.getElementsByTagName('h2')[3];
 const tieMsg = document.getElementsByTagName('h2')[4];
+const timesOut = document.getElementsByTagName('h2')[5];
 const xScore = document.getElementById("x_score");
 const oScore = document.getElementById("o_score");
 var xCount = 0;
 var oCount = 0;
 
+
+function endTurn(){
+    if(endGame == false) {timesOut.style.display = "block";}
+    message.style.display = "none";
+    setTimeout(function(){
+        timesOut.style.display = "none"; 
+        
+        if (endGame == false){message.style.display = "block";gamePlay();}
+    }, 3000)
+}
+
 function gamePlay(){//main Game Play
    checkBoard();
    switchTurns();
+  
 }
 
 function updateBoard(location){
@@ -301,7 +314,10 @@ function switchTurns(){
             checkBoard();
         }
     }
+    
     displayPlayer();
+    
+    
 }
 
 function checkWin(){//check for winning values
@@ -331,6 +347,7 @@ function playerWon(temp){ //update score of player won
         //console.log("x won")
         message.style.display = "none";
         xWON.style.display = "block";
+        timesOut.style.display = "none";
         ++xCount;
         xScore.innerText = xCount;
     }
@@ -338,6 +355,7 @@ function playerWon(temp){ //update score of player won
         //console.log("o won")
         message.style.display = "none";
         oWON.style.display = "block";
+        timesOut.style.display = "none";
         ++oCount;
         oScore.innerText = oCount;
     }
@@ -362,6 +380,7 @@ newGame_btn.addEventListener('click', function(){ //newGame button pressed
    xWON.style.display = "none";
    oWON.style.display = "none";
    tieMsg.style.display = "none";
+   timesOut.style.display = "none";
 });
 
 reset_btn.addEventListener('click', function(){ //initialize board
@@ -372,6 +391,8 @@ reset_btn.addEventListener('click', function(){ //initialize board
     for (var i = 0; i < span.length; ++i){
         span[i].innerText = "";
     }
+    xCount = 0;
+    oCount = 0;
     endGame = false;
     boardFull = false;
     chosenMode = false;
@@ -387,6 +408,7 @@ reset_btn.addEventListener('click', function(){ //initialize board
     twoPlayer_btn.style.display = "block";
     newGame_btn.style.display = "none";
     reset_btn.style.display = "none";
+    timesOut.style.display = "none";
 } );
 
 
@@ -404,3 +426,4 @@ function simpleAI(){
         }
     }
 }
+
