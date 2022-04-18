@@ -7,16 +7,41 @@ var currUser = 'X';
 const PLAYER1 = 'X';
 const PLAYER2 = 'O';
 
-
+var boardFull = false;
+var chosenMode = false;
+var twoPlayer = false;
 var endGame = false;
-const newGame_btn = document.getElementById('new_game')
-const reset_btn = document.getElementById('reset')
+const newGame_btn = document.getElementById('new_game');
+const reset_btn = document.getElementById('reset');
+const comp_btn = document.getElementById('computer');
+const twoPlayer_btn = document.getElementById('two_player');
+
+comp_btn.addEventListener("click", function(){
+    console.log("computer button pressed");
+    twoPlayer = false;
+    chosenMode = true;
+    comp_btn.style.display = "none";
+    twoPlayer_btn.style.display = "none";
+    newGame_btn.style.display = "block";
+    reset_btn.style.display = "block";
+});
+
+twoPlayer_btn.addEventListener("click", function(){
+    //console.log("two player pressed");
+    twoPlayer = true;
+    chosenMode = true;
+    comp_btn.style.display = "none";
+    twoPlayer_btn.style.display = "none";
+    newGame_btn.style.display = "block";
+    reset_btn.style.display = "block";
+});
+
 
 { //CLICK EVENTS
     var position1 = document.getElementsByClassName("one")[0];
     position1.addEventListener("click", function(){
         var span = this.getElementsByClassName("xo")[0];
-        if (span.innerText == "" && !endGame){
+        if (span.innerText == "" && !endGame && chosenMode){
             span.innerHTML = currUser;
             updateBoard(0);
             gamePlay();
@@ -38,7 +63,7 @@ const reset_btn = document.getElementById('reset')
     var position2 = document.getElementsByClassName("two")[0];
     position2.addEventListener("click", function(){
         var span = this.getElementsByClassName("xo")[0];
-        if (span.innerText == "" && !endGame){
+        if (span.innerText == "" && !endGame && chosenMode){
             span.innerHTML = currUser;
             updateBoard(1);
             gamePlay();
@@ -60,7 +85,7 @@ const reset_btn = document.getElementById('reset')
     var position3 = document.getElementsByClassName("three")[0];
     position3.addEventListener("click", function(){
         var span = this.getElementsByClassName("xo")[0];
-        if (span.innerText == "" && !endGame){
+        if (span.innerText == "" && !endGame && chosenMode){
             span.innerHTML = currUser;
             updateBoard(2);
             gamePlay();
@@ -82,7 +107,7 @@ const reset_btn = document.getElementById('reset')
     var position4 = document.getElementsByClassName("four")[0];
     position4.addEventListener("click", function(){
         var span = this.getElementsByClassName("xo")[0];
-        if (span.innerText == "" && !endGame){
+        if (span.innerText == "" && !endGame && chosenMode){
             span.innerHTML = currUser;
             updateBoard(3);
             gamePlay();
@@ -104,7 +129,7 @@ const reset_btn = document.getElementById('reset')
     var position5 = document.getElementsByClassName("five")[0];
     position5.addEventListener("click", function(){
         var span = this.getElementsByClassName("xo")[0];
-        if (span.innerText == "" && !endGame){
+        if (span.innerText == "" && !endGame && chosenMode){
             span.innerHTML = currUser;
             updateBoard(4);
             gamePlay();
@@ -126,7 +151,7 @@ const reset_btn = document.getElementById('reset')
     var position6 = document.getElementsByClassName("six")[0];
     position6.addEventListener("click", function(){
         var span = this.getElementsByClassName("xo")[0];
-        if (span.innerText == "" && !endGame){
+        if (span.innerText == "" && !endGame && chosenMode){
             span.innerHTML = currUser;
             updateBoard(5);
             gamePlay();
@@ -148,7 +173,7 @@ const reset_btn = document.getElementById('reset')
     var position7 = document.getElementsByClassName("seven")[0];
     position7.addEventListener("click", function(){
         var span = this.getElementsByClassName("xo")[0];
-        if (span.innerText == "" && !endGame){
+        if (span.innerText == "" && !endGame && chosenMode){
             span.innerHTML = currUser;
             updateBoard(6);
             gamePlay();
@@ -170,7 +195,7 @@ const reset_btn = document.getElementById('reset')
     var position8 = document.getElementsByClassName("eight")[0];
     position8.addEventListener("click", function(){
         var span = this.getElementsByClassName("xo")[0];
-        if (span.innerText == "" && !endGame){
+        if (span.innerText == "" && !endGame && chosenMode){
             span.innerHTML = currUser;
             updateBoard(7);
             gamePlay();
@@ -192,7 +217,7 @@ const reset_btn = document.getElementById('reset')
     var position9 = document.getElementsByClassName("nine")[0];
     position9.addEventListener("click", function(){
         var span = this.getElementsByClassName("xo")[0];
-        if (span.innerText == "" && !endGame){
+        if (span.innerText == "" && !endGame && chosenMode){
             span.innerHTML = currUser;
             updateBoard(8);
             gamePlay();
@@ -229,7 +254,7 @@ function gamePlay(){//main Game Play
 
 function updateBoard(location){
     boardValues[location] = currUser;
-   // console.log(boardValues)
+   console.log(boardValues)
 
 }
 
@@ -249,6 +274,9 @@ function checkBoard(){//if board is full
                 ++counter;
             }
         }
+        if (counter == 8){
+            boardFull = true;
+        }
         if (counter == 9){
             tieMsg.style.display = "display";
             endGame = true;
@@ -257,11 +285,16 @@ function checkBoard(){//if board is full
 } 
 
 function switchTurns(){
+    console.log("entered Switch turns")
+    console.log(twoPlayer);
     if(currUser == 'O'){
         currUser = PLAYER1;
     }
     else {
         currUser = PLAYER2;
+        if(twoPlayer == false && boardFull == false){
+            simpleAI();
+        }
     }
     displayPlayer();
 }
@@ -334,6 +367,7 @@ reset_btn.addEventListener('click', function(){ //initialize board
         span[i].innerText = "";
     }
     endGame = false;
+    boardFull = false;
     xScore.innerText = 0;
     oScore.innerText = 0;
     currUser = 'X'
@@ -343,3 +377,19 @@ reset_btn.addEventListener('click', function(){ //initialize board
     oWON.style.display = "none";
     tieMsg.style.display = "none";
 } );
+
+
+function simpleAI(){
+    var compPlayed = false;
+    while(!compPlayed){
+        var randNum = Math.floor(Math.random() * 9);
+        console.log(randNum);
+        if (boardValues[randNum] == '-'){
+            var span = document.getElementsByClassName("xo")[randNum];
+            span.innerHTML = currUser; 
+            updateBoard(randNum);
+            compPlayed = true;
+            gamePlay();
+        }
+    }
+}
