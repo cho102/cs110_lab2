@@ -278,7 +278,9 @@ function checkBoard(){//if board is full
             boardFull = true;
         }
         if (counter == 9){
-            tieMsg.style.display = "display";
+            console.log("its a tie");
+            tieMsg.style.display = "block";
+            message.style.display = "none";
             endGame = true;
         }
     }
@@ -292,8 +294,11 @@ function switchTurns(){
     }
     else {
         currUser = PLAYER2;
-        if(twoPlayer == false && boardFull == false){
+        if(twoPlayer == false && boardFull == false && endGame == false){
             simpleAI();
+        }
+        if (boardFull == true) {
+            checkBoard();
         }
     }
     displayPlayer();
@@ -348,6 +353,7 @@ newGame_btn.addEventListener('click', function(){ //newGame button pressed
         span[i].innerText = "";
     }
     endGame = false;
+    boardFull = false;
     currUser = 'X';
     displayPlayer();
     //message.style.display = block;
@@ -368,6 +374,7 @@ reset_btn.addEventListener('click', function(){ //initialize board
     }
     endGame = false;
     boardFull = false;
+    chosenMode = false;
     xScore.innerText = 0;
     oScore.innerText = 0;
     currUser = 'X'
@@ -376,6 +383,10 @@ reset_btn.addEventListener('click', function(){ //initialize board
     xWON.style.display = "none";
     oWON.style.display = "none";
     tieMsg.style.display = "none";
+    comp_btn.style.display = "block";
+    twoPlayer_btn.style.display = "block";
+    newGame_btn.style.display = "none";
+    reset_btn.style.display = "none";
 } );
 
 
