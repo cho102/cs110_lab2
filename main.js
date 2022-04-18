@@ -214,6 +214,9 @@ const reset_btn = document.getElementById('reset')
 }
 
 const message = document.getElementsByTagName('h2')[1];
+const xWON = document.getElementsByTagName('h2')[2];
+const oWON = document.getElementsByTagName('h2')[3];
+const tieMsg = document.getElementsByTagName('h2')[4];
 const xScore = document.getElementById("x_score");
 const oScore = document.getElementById("o_score");
 var xCount = 0;
@@ -229,9 +232,6 @@ function updateBoard(location){
    // console.log(boardValues)
 
 }
-
-const playerVal_temp = document.getElementsByClassName("display_player");
-console.log(playerVal_temp);
 
 const playerVal = document.getElementsByClassName("display_player")[0];
 function displayPlayer() {
@@ -250,8 +250,7 @@ function checkBoard(){//if board is full
             }
         }
         if (counter == 9){
-            console.log("game is tie")
-            message.innerText = "IT IS A TIE!"
+            tieMsg.style.display = "display";
             endGame = true;
         }
     }
@@ -291,14 +290,16 @@ function checkWin(){//check for winning values
 function playerWon(temp){ //update score of player won
  //check 
     if (temp == 'X'){
-        console.log("x won")
-        message.innerText = "X WON!"
+        //console.log("x won")
+        message.style.display = "none";
+        xWON.style.display = "block";
         ++xCount;
         xScore.innerText = xCount;
     }
     else {
-        console.log("o won")
-        message.innerText = "O WON!"
+        //console.log("o won")
+        message.style.display = "none";
+        oWON.style.display = "block";
         ++oCount;
         oScore.innerText = oCount;
     }
@@ -315,9 +316,13 @@ newGame_btn.addEventListener('click', function(){ //newGame button pressed
     }
     endGame = false;
     currUser = 'X';
+    displayPlayer();
     //message.style.display = block;
-    console.log('new game clicked')
-    message.innerHTML = "It\'s your turn, <span class=\"display_player\">X</span>.";
+    //console.log('new game clicked')
+   message.style.display = "block";
+   xWON.style.display = "none";
+   oWON.style.display = "none";
+   tieMsg.style.display = "none";
 });
 
 reset_btn.addEventListener('click', function(){ //initialize board
@@ -332,6 +337,9 @@ reset_btn.addEventListener('click', function(){ //initialize board
     xScore.innerText = 0;
     oScore.innerText = 0;
     currUser = 'X'
-    message.innerHTML = "It\'s your turn, <span class=\"display_player\">X</span>.";
-    
+    displayPlayer();
+    message.style.display = "block";
+    xWON.style.display = "none";
+    oWON.style.display = "none";
+    tieMsg.style.display = "none";
 } );
