@@ -566,6 +566,7 @@ function switchTurns(){
             checkBoard();
         }
     }
+    if(endGame == true){timesOut.style.display = "none";}
     
     displayPlayer();
     
@@ -684,28 +685,7 @@ reset_btn.addEventListener('click', function(){ //initialize board
     newGame_btn.style.display = "none";
     reset_btn.style.display = "none";
     timesOut.style.display = "none";
-    timer = window.setInterval(function(){
-        timesOut.style.display = "block";
-        message.style.display = "none";
-        console.log("set timer reset");
-        var timeSwitch = setTimeout(function(){
-            timesOut.style.display = "none";
-            message.style.display = "block";
-            if(currUser == 'O'){
-                currUser = PLAYER1;
-            }
-            else {
-                currUser = PLAYER2;
-                if(twoPlayer == false && boardFull == false && endGame == false){
-                    simpleAI();
-                }
-                if (boardFull == true) {
-                    checkBoard();
-                }
-            }
-            displayPlayer();
-        }, 500)   
-    }, 2000)
+    clearInterval(timer);
 } );
 
 
