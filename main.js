@@ -73,7 +73,23 @@ twoPlayer_btn.addEventListener("click", function(){
     
 });
 
-
+function switchTurnsMsg(){
+    timesOut.style.display = "none";
+    message.style.display = "block";
+    if(currUser == 'O'){
+        currUser = PLAYER1;
+    }
+    else {
+        currUser = PLAYER2;
+        if(twoPlayer == false && boardFull == false && endGame == false){
+            simpleAI();
+        }
+        if (boardFull == true) {
+            checkBoard();
+        }
+    }
+    displayPlayer();
+}
 
 { //CLICK EVENTS
     { //position 1
@@ -89,21 +105,7 @@ twoPlayer_btn.addEventListener("click", function(){
                 message.style.display = "none";
                 console.log("set timer1");
                 var timeSwitch = setTimeout(function(){
-                    timesOut.style.display = "none";
-                    message.style.display = "block";
-                    if(currUser == 'O'){
-                        currUser = PLAYER1;
-                    }
-                    else {
-                        currUser = PLAYER2;
-                        if(twoPlayer == false && boardFull == false && endGame == false){
-                            simpleAI();
-                        }
-                        if (boardFull == true) {
-                            checkBoard();
-                        }
-                    }
-                    displayPlayer();
+                    switchTurnsMsg();
                 }, 500)   
             }, 2000)
             updateBoard(0);
@@ -137,22 +139,8 @@ twoPlayer_btn.addEventListener("click", function(){
                     message.style.display = "none";
                     console.log("set timer2");
                     var timeSwitch = setTimeout(function(){
-                        timesOut.style.display = "none";
-                        message.style.display = "block";
-                        if(currUser == 'O'){
-                            currUser = PLAYER1;
-                        }
-                        else {
-                            currUser = PLAYER2;
-                            if(twoPlayer == false && boardFull == false && endGame == false){
-                                simpleAI();
-                            }
-                            if (boardFull == true) {
-                                checkBoard();
-                            }
-                        }
-                        displayPlayer();
-                    }, 500)   
+                        switchTurnsMsg();
+                    }, 500)  
                 }, 2000)
                 updateBoard(1);
                 gamePlay();
@@ -185,21 +173,7 @@ twoPlayer_btn.addEventListener("click", function(){
                     message.style.display = "none";
                     console.log("set timer3");
                     var timeSwitch = setTimeout(function(){
-                        timesOut.style.display = "none";
-                        message.style.display = "block";
-                        if(currUser == 'O'){
-                            currUser = PLAYER1;
-                        }
-                        else {
-                            currUser = PLAYER2;
-                            if(twoPlayer == false && boardFull == false && endGame == false){
-                                simpleAI();
-                            }
-                            if (boardFull == true) {
-                                checkBoard();
-                            }
-                        }
-                        displayPlayer();
+                        switchTurnsMsg();
                     }, 500)   
                 }, 2000)
                 updateBoard(2);
@@ -233,22 +207,8 @@ twoPlayer_btn.addEventListener("click", function(){
                     message.style.display = "none";
                     console.log("set timer4");
                     var timeSwitch = setTimeout(function(){
-                        timesOut.style.display = "none";
-                        message.style.display = "block";
-                        if(currUser == 'O'){
-                            currUser = PLAYER1;
-                        }
-                        else {
-                            currUser = PLAYER2;
-                            if(twoPlayer == false && boardFull == false && endGame == false){
-                                simpleAI();
-                            }
-                            if (boardFull == true) {
-                                checkBoard();
-                            }
-                        }
-                        displayPlayer();
-                    }, 500)   
+                        switchTurnsMsg();
+                    }, 500)  
                 }, 2000)
                 updateBoard(3);
                 gamePlay();
@@ -281,22 +241,8 @@ twoPlayer_btn.addEventListener("click", function(){
                     message.style.display = "none";
                     console.log("set timer5");
                     var timeSwitch = setTimeout(function(){
-                        timesOut.style.display = "none";
-                        message.style.display = "block";
-                        if(currUser == 'O'){
-                            currUser = PLAYER1;
-                        }
-                        else {
-                            currUser = PLAYER2;
-                            if(twoPlayer == false && boardFull == false && endGame == false){
-                                simpleAI();
-                            }
-                            if (boardFull == true) {
-                                checkBoard();
-                            }
-                        }
-                        displayPlayer();
-                    }, 500)   
+                        switchTurnsMsg();
+                    }, 500)    
                 }, 2000)
                 updateBoard(4);
                 gamePlay();
@@ -329,21 +275,7 @@ twoPlayer_btn.addEventListener("click", function(){
                     message.style.display = "none";
                     console.log("set timer6");
                     var timeSwitch = setTimeout(function(){
-                        timesOut.style.display = "none";
-                        message.style.display = "block";
-                        if(currUser == 'O'){
-                            currUser = PLAYER1;
-                        }
-                        else {
-                            currUser = PLAYER2;
-                            if(twoPlayer == false && boardFull == false && endGame == false){
-                                simpleAI();
-                            }
-                            if (boardFull == true) {
-                                checkBoard();
-                            }
-                        }
-                        displayPlayer();
+                        switchTurnsMsg();
                     }, 500)   
                 }, 2000)
                 updateBoard(5);
@@ -377,22 +309,8 @@ twoPlayer_btn.addEventListener("click", function(){
                     message.style.display = "none";
                     console.log("set timer7");
                     var timeSwitch = setTimeout(function(){
-                        timesOut.style.display = "none";
-                        message.style.display = "block";
-                        if(currUser == 'O'){
-                            currUser = PLAYER1;
-                        }
-                        else {
-                            currUser = PLAYER2;
-                            if(twoPlayer == false && boardFull == false && endGame == false){
-                                simpleAI();
-                            }
-                            if (boardFull == true) {
-                                checkBoard();
-                            }
-                        }
-                        displayPlayer();
-                    }, 500)   
+                        switchTurnsMsg();
+                    }, 500) 
                 }, 2000)
                 updateBoard(6);
                 gamePlay();
@@ -425,22 +343,8 @@ twoPlayer_btn.addEventListener("click", function(){
                     message.style.display = "none";
                     console.log("set timer8");
                     var timeSwitch = setTimeout(function(){
-                        timesOut.style.display = "none";
-                        message.style.display = "block";
-                        if(currUser == 'O'){
-                            currUser = PLAYER1;
-                        }
-                        else {
-                            currUser = PLAYER2;
-                            if(twoPlayer == false && boardFull == false && endGame == false){
-                                simpleAI();
-                            }
-                            if (boardFull == true) {
-                                checkBoard();
-                            }
-                        }
-                        displayPlayer();
-                    }, 500)   
+                        switchTurnsMsg();
+                    }, 500) 
                 }, 2000)
                 updateBoard(7);
                 gamePlay();
@@ -473,22 +377,8 @@ twoPlayer_btn.addEventListener("click", function(){
                     message.style.display = "none";
                     console.log("set timer9");
                     var timeSwitch = setTimeout(function(){
-                        timesOut.style.display = "none";
-                        message.style.display = "block";
-                        if(currUser == 'O'){
-                            currUser = PLAYER1;
-                        }
-                        else {
-                            currUser = PLAYER2;
-                            if(twoPlayer == false && boardFull == false && endGame == false){
-                                simpleAI();
-                            }
-                            if (boardFull == true) {
-                                checkBoard();
-                            }
-                        }
-                        displayPlayer();
-                    }, 500)   
+                        switchTurnsMsg();
+                    }, 500) 
                 }, 2000)
                 updateBoard(8);
                 gamePlay();
